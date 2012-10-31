@@ -1,0 +1,42 @@
+<html>
+<head>
+    <meta name="decorator" content="admin">
+    <title>Configure Time In Status CF</title>
+</head>
+<body>
+
+<form id="timeinstatus-configure-form" method="post" class="aui"
+      action="${req.contextPath}/secure/ConfigureTimeInStatusFieldAction.jspa">
+    <div class="form-body">
+
+        <h2>Configure Time In Status</h2>
+
+        #foreach($error in $errorMessages)<div class="aui-message error"><span class="error-icon"></span>$error</div>#end
+
+        <fieldset>
+            <div class="field-group" id="field-group-0">
+                <label for="statusId">Status Id</label>
+                <input id="statusId" name="statusId" #if ($statusId) value='$statusId' #end type="text" class="text long-field"/>
+                <div class="description">Concrete status Id</div>
+                #if ($action.getErrors().get("statusId"))
+                    <div class="error">$textutils.htmlEncode($action.getErrors().get("statusId"))</div>
+                #end
+            </div>
+        </fieldset>
+
+    </div>
+
+    <div class="buttons-container form-footer">
+        <div class="buttons">
+            <input class="button submit" type="submit" value="${i18n.getText('common.words.save')}" >
+            <a accesskey="`" class="cancel" href="#" id="cancel-button" title="${i18n.getText('common.words.cancel')}">${i18n.getText("common.words.cancel")}</a>
+        </div>
+    </div>
+
+
+    <input type="hidden" name="customFieldId" value="$action.getCustomField().getIdAsLong()">
+    <input type="hidden" name="fieldConfigId" value="$fieldConfigId">
+
+</form>
+</body>
+</html>
